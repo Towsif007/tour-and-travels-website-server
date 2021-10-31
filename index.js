@@ -38,8 +38,28 @@ async function run (){
             res.json(tour)
         })
         
+        // Get Orders
+
+        app.get("/myOrders/:email", async (req, res) => {
+            const result = await EventsCollection.find({
+                 email: req.params.email
+            }).toArray();
+            res.send(result);
+          });
+        
+
+        app.get()
+
         // POST API
-        app.post('/tours')
+        app.post('/addtours', async (req, res) => {
+            const addTour = req.body;
+            // console.log('hit the post api', addTour);
+
+            const result = await toursCollection.insertOne(addTour);
+            console.log(result);
+            res.json(result)
+           
+        });
     }
     finally{
         // await client.close(); 

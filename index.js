@@ -38,17 +38,17 @@ async function run (){
             res.json(tour)
         })
         
-        // Get Orders
+        // My Orders 
 
         app.get("/myOrders/:email", async (req, res) => {
-            const result = await EventsCollection.find({
-                 email: req.params.email
+            // const email = req.params.email;
+            // const search = {}
+            const result = await toursCollection.find({
+                email: req.params.email,
             }).toArray();
-            res.send(result);
+            res.json(result);
           });
         
-
-       
 
         // POST API
         app.post('/addtours', async (req, res) => {
@@ -57,7 +57,6 @@ async function run (){
             const result = await toursCollection.insertOne(addTour);
             console.log(result);
             res.json(result)
-            // res.send('post hitted')
            
         });
     }
